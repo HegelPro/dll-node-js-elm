@@ -25,9 +25,9 @@ main =
 
 -- PORTS
 
-port messageReceiver : (Int -> msg) -> Sub msg
+port fromJsToElm : (Int -> msg) -> Sub msg
 
-port requestResult : { a: Int, b: Int } -> Cmd msg
+port fromElmToJs : { a: Int, b: Int } -> Cmd msg
 
 
 
@@ -73,7 +73,7 @@ update msg model =
 
         RequestResult a b ->
             ( model
-            , requestResult ({a = a, b = b})
+            , fromElmToJs ({a = a, b = b})
             )
 
         Recv result ->
@@ -87,7 +87,7 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    messageReceiver Recv
+    fromJsToElm Recv
 
 
 

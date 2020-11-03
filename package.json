@@ -6,10 +6,10 @@
   "private": true,
   "scripts": {
     "start": "electron .",
-    "build": "webpack --mode production",
-    "watch": "webpack --mode development --watch",
-    "dev": "webpack-dev-server --mode development --port 3000",
-    "errors": "webpack --mode development --display-error-details"
+    "buildElectron": "electron-packager . project",
+    "buildJS": "webpack --mode production",
+    "build": "npm run buildJS && npm run buildElectron",
+    "watch": "webpack --mode development --watch"
   },
   "author": "",
   "license": "ISC",
@@ -18,11 +18,11 @@
     "ffi-napi": "3.0.1"
   },
   "devDependencies": {
+    "electron-packager": "15.1.0",
     "elm-webpack-loader": "7.0.1",
     "loader-utils": "1.1.0",
     "node-gyp": "7.1.0",
     "webpack": "4.0.1",
-    "webpack-cli": "2.0.9",
-    "webpack-dev-server": "3.9.0"
+    "webpack-cli": "2.0.9"
   }
 }

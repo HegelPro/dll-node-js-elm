@@ -2,8 +2,13 @@ const { ipcMain } = require('electron')
 
 const lib = require('./lib')
 
-ipcMain.on('asynchronous-message', (event, arg) => {
-  console.log('asynchronous-message', arg)
+ipcMain.on('fromJsToNode', (event, arg) => {
+  console.log('fromJsToNode', arg)
 
-  event.reply('asynchronous-reply', lib.divUnsignedInt(arg.a, arg.b))
+  try {
+    event.reply('fromNodeToJs', lib.divUnsignedInt(arg.a, arg.b))
+    
+  } catch (error) {
+    event.reply('fromNodeToJsError')
+  }
 })

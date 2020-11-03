@@ -1,13 +1,19 @@
 const elm = require('./elm')
 
-elm.ports.requestResult.subscribe((arg) => {
-    console.log('requestResult', arg)
+elm.ports.fromElmToJs.subscribe((arg) => {
+    console.log('fromElmToJs', arg)
 
-    ipcRenderer.send('asynchronous-message', arg)
+    ipcRenderer.send('fromJsToNode', arg)
 })
 
-ipcRenderer.on('asynchronous-reply', (_, arg) => {
-    console.log('asynchronous-reply', arg)
+ipcRenderer.on('fromNodeToJs', (_, arg) => {
+    console.log('fromNodeToJs', arg)
 
-    elm.ports.messageReceiver.send(arg)
+    elm.ports.fromJsToElm.send(arg)
+})
+
+ipcRenderer.on('fromNodeToJsError', () => {
+    console.log('fromNodeToJsError')
+
+    alert('Результат не может быть подсчитан с введёнными параметрами')
 })

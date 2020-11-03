@@ -2,3 +2,4 @@ dist/
 elm-stuff/
 node_modules/
 tmp/
+project-win32-x64/
