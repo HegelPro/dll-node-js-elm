@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "electron .",
-    "buildElectron": "electron-packager . project",
+    "buildElectron": "electron-packager . project --overwrite",
     "buildJS": "webpack --mode production",
     "build": "npm run buildJS && npm run buildElectron",
     "watch": "webpack --mode development --watch"

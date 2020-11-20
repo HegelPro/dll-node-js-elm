@@ -12,8 +12,14 @@ ipcRenderer.on('fromNodeToJs', (_, arg) => {
     elm.ports.fromJsToElm.send(arg)
 })
 
-ipcRenderer.on('fromNodeToJsError', () => {
-    console.log('fromNodeToJsError')
+ipcRenderer.on('fromNodeToJsError', (_, arg) => {
+    console.log('fromNodeToJsError', arg)
 
-    alert('Результат не может быть подсчитан с введёнными параметрами')
+    if (arg === 1) {
+        alert('Пожалуйста, выберете первое число меньше')
+    } else if (arg === 2) {
+        alert('Пожалуйста, выберете второе число меньше')
+    } else if (arg === 3) {
+        alert('На 0 делить нельзя')
+    }
 })

@@ -5,10 +5,12 @@ const lib = require('./lib')
 ipcMain.on('fromJsToNode', (event, arg) => {
   console.log('fromJsToNode', arg)
 
-  try {
-    event.reply('fromNodeToJs', lib.divUnsignedInt(arg.a, arg.b))
-    
-  } catch (error) {
-    event.reply('fromNodeToJsError')
+  lib.countDivUnsignedInt(arg.a, arg.b)
+
+  if (lib.getErrorCode() === 0) {
+    event.reply('fromNodeToJs', lib.getResult())
+  } else {
+    event.reply('fromNodeToJsError', lib.getErrorCode())
   }
+
 })
